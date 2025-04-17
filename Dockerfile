@@ -7,11 +7,14 @@ WORKDIR /app
 # Copiar archivos de configuración
 COPY package.json ./
 
-# Instalar dependencias (usando npm install en lugar de npm ci)
+# Instalar dependencias
 RUN npm install
 
 # Copiar código fuente
 COPY . .
+
+# Crear directorios de componentes UI si no existen
+RUN mkdir -p components/ui
 
 # Construir la aplicación
 RUN npm run build
@@ -43,7 +46,7 @@ USER nextjs
 # Exponer puerto
 EXPOSE 3000
 
-# Establecer variables de entorno para el host y puerto (corregido el formato)
+# Establecer variables de entorno para el host y puerto
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
