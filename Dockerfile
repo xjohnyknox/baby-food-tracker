@@ -5,10 +5,10 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copiar archivos de configuración
-COPY package.json package-lock.json* ./
+COPY package.json ./
 
-# Instalar dependencias
-RUN npm ci
+# Instalar dependencias (usando npm install en lugar de npm ci)
+RUN npm install
 
 # Copiar código fuente
 COPY . .
@@ -43,9 +43,9 @@ USER nextjs
 # Exponer puerto
 EXPOSE 3000
 
-# Establecer variables de entorno para el host y puerto
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
+# Establecer variables de entorno para el host y puerto (corregido el formato)
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
 # Comando para ejecutar la aplicación
 CMD ["node", "server.js"]
