@@ -5,16 +5,13 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copiar archivos de configuración
-COPY package.json ./
+COPY package.json tsconfig.json ./
 
 # Instalar dependencias
 RUN npm install
 
 # Copiar código fuente
 COPY . .
-
-# Crear directorios de componentes UI si no existen
-RUN mkdir -p components/ui
 
 # Construir la aplicación
 RUN npm run build
